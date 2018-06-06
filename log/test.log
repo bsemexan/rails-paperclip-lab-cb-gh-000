@@ -18540,3 +18540,39 @@ Completed 200 OK in 4ms (Views: 3.6ms | ActiveRecord: 0.3ms)
   [1m[36mSong Load (0.1ms)[0m  [1mSELECT  "songs".* FROM "songs"  ORDER BY "songs"."id" ASC LIMIT 1[0m
   Rendered songs/show.html.erb (0.8ms)
   [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mArtist Load (0.2ms)[0m  SELECT "artists".* FROM "artists"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "artists" WHERE "artists"."id" = ?  [["id", 6]]
+  [1m[36m (2.7ms)[0m  [1mcommit transaction[0m
+  [1m[35mSong Load (0.3ms)[0m  SELECT "songs".* FROM "songs"
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  DELETE FROM "songs" WHERE "songs"."id" = ?  [["id", 7]]
+  [1m[36m (2.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mDELETE FROM "songs" WHERE "songs"."id" = ?[0m  [["id", 8]]
+  [1m[35m (2.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "artists" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "Daft Punk"], ["created_at", "2018-06-06 01:27:00.226831"], ["updated_at", "2018-06-06 01:27:00.226831"]]
+  [1m[36m (2.3ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "songs" ("title", "artist_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "The Grid"], ["artist_id", 7], ["created_at", "2018-06-06 01:27:00.248783"], ["updated_at", "2018-06-06 01:27:00.248783"]]
+  [1m[35m (2.5ms)[0m  commit transaction
+Started GET "/songs/new" for 127.0.0.1 at 2018-06-06 01:27:00 +0000
+Processing by SongsController#new as HTML
+  Rendered songs/_form.html.erb (15.9ms)
+  Rendered songs/new.html.erb within layouts/application (20.0ms)
+Completed 200 OK in 226ms (Views: 225.2ms | ActiveRecord: 0.0ms)
+Started POST "/songs" for 127.0.0.1 at 2018-06-06 01:27:00 +0000
+Processing by SongsController#create as HTML
+  Parameters: {"utf8"=>"✓", "song"=>{"album_cover"=>#<ActionDispatch::Http::UploadedFile:0x00000007a17028 @tempfile=#<Tempfile:/tmp/RackMultipart20180606-3227-l2szhp.gif>, @original_filename="homer.gif", @content_type="image/gif", @headers="Content-Disposition: form-data; name=\"song[album_cover]\"; filename=\"homer.gif\"\r\nContent-Type: image/gif\r\nContent-Length: 1845619\r\n">, "title"=>"Birdhouse In Your Soul", "artist_name"=>"TMBG"}, "commit"=>"Create Song"}
+  [1m[36mArtist Load (0.2ms)[0m  [1mSELECT  "artists".* FROM "artists" WHERE "artists"."name" = ? LIMIT 1[0m  [["name", "TMBG"]]
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "artists" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "TMBG"], ["created_at", "2018-06-06 01:27:00.529345"], ["updated_at", "2018-06-06 01:27:00.529345"]]
+  [1m[35m (2.4ms)[0m  commit transaction
+[paperclip] Trying to link /tmp/RackMultipart20180606-3227-l2szhp.gif to /tmp/dfa8327f5bfa4c672a04f9b38e348a7020180606-3227-zx0to9.gif
+[paperclip] Trying to link /tmp/dfa8327f5bfa4c672a04f9b38e348a7020180606-3227-zx0to9.gif to /tmp/dfa8327f5bfa4c672a04f9b38e348a7020180606-3227-1apqm86.gif
+Command :: file -b --mime '/tmp/dfa8327f5bfa4c672a04f9b38e348a7020180606-3227-1apqm86.gif'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/dfa8327f5bfa4c672a04f9b38e348a7020180606-3227-zx0to9.gif[0]' 2>/dev/null
+Command :: identify -format %m '/tmp/dfa8327f5bfa4c672a04f9b38e348a7020180606-3227-zx0to9.gif[0]'
+Command :: convert '/tmp/dfa8327f5bfa4c672a04f9b38e348a7020180606-3227-zx0to9.gif' -coalesce -auto-orient -resize "100x100>" -layers "optimize" '/tmp/99261e30299d2eb4f39eb1c57ae1e51a20180606-3227-r10uzh'
